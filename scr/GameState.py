@@ -7,9 +7,8 @@ class GameState(State):
 
     def tick(self):
         self.board.tick()
-        print("GameState")
 
     def render(self, win):
-        win.fill((200, 50, 50))
+        win.fill((220, 244, 222))
 
         self.board.render(win)

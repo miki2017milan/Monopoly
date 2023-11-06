@@ -5,7 +5,7 @@ class MenuState(State):
         pass
 
     def tick(self):
-        print("MenuState")
+        pass
 
     def render(self, win):
         win.fill((50, 200, 50))
