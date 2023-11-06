@@ -1,5 +1,9 @@
 import pygame as py
 
+from GameState import GameState
+from MenuState import MenuState
+from State import State
+
 py.init()
 
 class Main:
@@ -16,13 +20,21 @@ class Main:
         self.FPS = 60
         self.running = True
 
+        # States
+        self.game_state = GameState()
+        self.menu_state = MenuState()
+
+        State.switch_state(self.game_state)
+
     def tick(self):
         for e in py.event.get():
             if e.type == py.QUIT:
                 self.running = False
             if e.type == py.KEYDOWN:
                 if e.key == py.K_ESCAPE:
-                    self.running = False
+                    State.switch_state(self.menu_state)
+
+        State.get_state().tick()
 
         self.clock.tick(self.FPS)
 
@@ -30,6 +42,8 @@ class Main:
         # Filling Background
         self.win.fill((200, 200, 200))
             
+        State.get_state().render(self.win)
+        
         py.display.update()
 
     def run(self):
