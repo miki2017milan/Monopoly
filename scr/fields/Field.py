@@ -6,13 +6,20 @@ PLAYER_COLORS = [(200, 50, 50), (50, 200, 50), (50, 50, 200), (200, 50, 200)]
 PLAYER_SIZE = 30
 
 class Field(ABC):
-    def __init__(self, x: int, y: int, width: int, height: int, player_spots_pos: tuple):
+    def __init__(self, x: int, y: int, width: int, height: int, player_placment_offset: int):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.player_spots_pos = player_spots_pos
         self.player_spots = [0, 0, 0, 0]
+
+        # Calculate player spots
+        space_x = int((width - PLAYER_SIZE * 2) / 3)
+        space_y = int(((height - player_placment_offset) - PLAYER_SIZE * 2) / 3)
+        self.player_spots_pos = ((space_x, space_y + player_placment_offset), # Top-left
+                                 (space_x * 2 + PLAYER_SIZE, space_y + player_placment_offset), # Top-right
+                                 (space_x, space_y * 2 + PLAYER_SIZE + player_placment_offset), # Bottom-left
+                                 (space_x * 2 + PLAYER_SIZE, space_y * 2 + PLAYER_SIZE + player_placment_offset)) # Bottom-right
 
         self.can_click = True
         self.is_selected = False
@@ -56,7 +63,11 @@ class Field(ABC):
             if not p == 0:
                 py.draw.ellipse(win, PLAYER_COLORS[p - 1], (self.x + self.player_spots_pos[i][0], self.y + self.player_spots_pos[i][1], PLAYER_SIZE, PLAYER_SIZE)) 
 
-        self.render_extra_information(win)   
+        self.render_extra_information(win)
+
+    @abstractmethod
+    def on_land(self, player):
+        pass
 
     @abstractmethod
     def render_extra_information(self, win):

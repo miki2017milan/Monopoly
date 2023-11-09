@@ -11,12 +11,18 @@ class GameState(State):
 
         self.cur_player = self.players[0]
 
+        self.money_font = py.font.SysFont("Bahnschrift", 50, bold=True)
+
     def tick(self):
         self.board.tick()
 
-        # print(f"X: {py.mouse.get_pos()[0]}, Y: {py.mouse.get_pos()[1]}")
+        # if py.mouse.get_pressed()[0]:
+        #     print(f"X: {py.mouse.get_pos()[0]}, Y: {py.mouse.get_pos()[1]}")
 
     def render(self, win):
         win.fill((220, 244, 222))
+
+        # Render player information
+        win.blit(self.money_font.render(f"Money: {self.cur_player.money}$", False, (0, 0, 0)), (0, 0))
 
         self.board.render(win)

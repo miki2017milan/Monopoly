@@ -12,3 +12,6 @@ class Player:
 
     def tick(self):
         pass
+
+    def add_money(self, amount):
+        self.money += amount
