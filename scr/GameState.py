@@ -7,6 +7,9 @@ from Player import Player
 class GameState(State):
     def __init__(self):
         self.board = Board()
+        self.players = [Player(0, 1)]
+
+        self.cur_player = self.players[0]
 
     def tick(self):
         self.board.tick()

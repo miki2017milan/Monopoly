@@ -33,6 +33,7 @@ class Main:
             if e.type == py.KEYDOWN:
                 if e.key == py.K_ESCAPE:
                     State.switch_state(self.menu_state)
+                    # self.game_state.board.fields[0].remove_player(3)
 
         State.get_state().tick()
 

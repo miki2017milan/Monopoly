@@ -7,12 +7,10 @@ class StreetField(Field):
         super().__init__(x, y, width, height, player_spots_pos)
 
     def tick(self):
-        if self.is_clicked():
-            print("Wurde gecklicked")
+        # if self.is_clicked():
+        #     print("Wurde gecklicked")
 
         self.reset_click()
 
-    def render(self, win):
-        self.render_players(win)
-
-        py.draw.rect(win, (200, 50, 50), (self.x, self.y, self.width, self.height), 2)
+    def render_extra_information(self, win):
+        pass
