@@ -1,4 +1,5 @@
 import pygame as py
+import sys
 
 from fields.Field import Field
 
@@ -13,11 +14,11 @@ class StreetField(Field):
         self.house_cost = 0
         self.rent_costs = []
         self.img = None
-        self.houses = 3
+        self.houses = 5
         self.facing_dir = ""
 
-        self.house_img = py.image.load("././imgs/House.png")
-        self.hotel_img = py.image.load("././imgs/Hotel.png")
+        self.house_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\House.png"))
+        self.hotel_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\Hotel.png"))
 
         self.font = py.font.SysFont("Bahnschrift", 30, bold=True)
 
@@ -32,7 +33,7 @@ class StreetField(Field):
         self.price = price
         self.house_cost = house_cost
         self.rent_costs = rent_costs
-        self.img = py.image.load(img)
+        self.img = py.image.load(sys.path[0].replace("\\scr", "\\imgs" + img))
         self.facing_dir = facing_dir
 
     def on_land(self, player):
