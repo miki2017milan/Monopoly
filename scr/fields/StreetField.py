@@ -1,3 +1,4 @@
+from tokenize import String
 import pygame as py
 import sys
 
@@ -6,7 +7,7 @@ from fields.Field import Field
 HOUSE_SIZE = 20
 
 class StreetField(Field):
-    def __init__(self, x: int, y: int, width: int, height: int, player_placment_offset: int):
+    def __init__(self, x: int, y: int, width: int, height: int, player_placment_offset: tuple):
         super().__init__(x, y, width, height, player_placment_offset)
 
         self.name = ""
@@ -16,6 +17,7 @@ class StreetField(Field):
         self.img = None
         self.houses = 5
         self.facing_dir = ""
+        self.color = ""
 
         self.house_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\House.png"))
         self.hotel_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\Hotel.png"))
@@ -28,13 +30,14 @@ class StreetField(Field):
 
         self.reset_click()
 
-    def add_information(self, name, price, house_cost, rent_costs, img, facing_dir):
+    def add_information(self, name: str, price: int, house_cost: int, rent_costs: int, img_path: str, facing_dir: str, color: str):
         self.name = name
         self.price = price
         self.house_cost = house_cost
         self.rent_costs = rent_costs
-        self.img = py.image.load(sys.path[0].replace("\\scr", "\\imgs" + img))
+        self.img = py.image.load(sys.path[0].replace("\\scr", "\\imgs" + img_path))
         self.facing_dir = facing_dir
+        self.color = color
 
     def on_land(self, player):
         pass
@@ -54,15 +57,15 @@ class StreetField(Field):
 
             # Mark current rent with houses
             if self.houses == 0:
-                py.draw.rect(win, (250, 0, 0), (1640, 115, 80, 30), 3)
+                py.draw.rect(win, (250, 0, 0), (1630, 115, 80, 30), 3)
             elif self.houses == 1:
-                py.draw.rect(win, (250, 0, 0), (1755, 147, 60, 30), 3)
+                py.draw.rect(win, (250, 0, 0), (1740, 147, 60, 30), 3)
             elif self.houses == 2:
-                py.draw.rect(win, (250, 0, 0), (1755, 179, 60, 30), 3)
+                py.draw.rect(win, (250, 0, 0), (1740, 179, 60, 30), 3)
             elif self.houses == 3:
-                py.draw.rect(win, (250, 0, 0), (1755, 211, 60, 30), 3)
+                py.draw.rect(win, (250, 0, 0), (1740, 211, 60, 30), 3)
             elif self.houses == 4:
-                py.draw.rect(win, (250, 0, 0), (1755, 243, 60, 30), 3)
+                py.draw.rect(win, (250, 0, 0), (1740, 243, 60, 30), 3)
             elif self.houses == 5:
                 py.draw.rect(win, (250, 0, 0), (1590, 275, 180, 30), 3)
 

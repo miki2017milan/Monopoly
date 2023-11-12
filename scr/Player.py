@@ -1,3 +1,4 @@
+import time
 import pygame as py
 
 START_MONEY = 5000

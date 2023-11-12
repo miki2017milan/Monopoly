@@ -16,8 +16,8 @@ class GameState(State):
     def tick(self):
         self.board.tick()
 
-        # if py.mouse.get_pressed()[0]:
-        #     print(f"X: {py.mouse.get_pos()[0]}, Y: {py.mouse.get_pos()[1]}")
+        if py.mouse.get_pressed()[0]:
+            print(f"X: {py.mouse.get_pos()[0]}, Y: {py.mouse.get_pos()[1]}")
 
     def render(self, win):
         win.fill((220, 244, 222))

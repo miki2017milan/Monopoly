@@ -6,7 +6,7 @@ PLAYER_COLORS = [(200, 50, 50), (50, 200, 50), (50, 50, 200), (200, 50, 200)]
 PLAYER_SIZE = 30
 
 class Field(ABC):
-    def __init__(self, x: int, y: int, width: int, height: int, player_placment_offset: int):
+    def __init__(self, x: int, y: int, width: int, height: int, player_placement_offset: tuple):
         self.x = x
         self.y = y
         self.width = width
@@ -15,11 +15,11 @@ class Field(ABC):
 
         # Calculate player spots
         space_x = int((width - PLAYER_SIZE * 2) / 3)
-        space_y = int(((height - player_placment_offset) - PLAYER_SIZE * 2) / 3)
-        self.player_spots_pos = ((space_x, space_y + player_placment_offset), # Top-left
-                                 (space_x * 2 + PLAYER_SIZE, space_y + player_placment_offset), # Top-right
-                                 (space_x, space_y * 2 + PLAYER_SIZE + player_placment_offset), # Bottom-left
-                                 (space_x * 2 + PLAYER_SIZE, space_y * 2 + PLAYER_SIZE + player_placment_offset)) # Bottom-right
+        space_y = int(((height - player_placement_offset[1]) - PLAYER_SIZE * 2) / 3)
+        self.player_spots_pos = ((space_x + player_placement_offset[0], space_y + player_placement_offset[1]), # Top-left
+                                 (space_x * 2 + PLAYER_SIZE + player_placement_offset[0], space_y + player_placement_offset[1]), # Top-right
+                                 (space_x + player_placement_offset[0], space_y * 2 + PLAYER_SIZE + player_placement_offset[1]), # Bottom-left
+                                 (space_x * 2 + PLAYER_SIZE + player_placement_offset[0], space_y * 2 + PLAYER_SIZE + player_placement_offset[1])) # Bottom-right
 
         self.can_click = True
         self.is_selected = False
