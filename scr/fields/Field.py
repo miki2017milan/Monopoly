@@ -30,12 +30,13 @@ class Field(ABC):
         self.overlay.set_alpha(128)
         self.overlay.fill((30, 30, 30))
 
-    def is_clicked(self):
+    def is_clicked(self) -> bool:
         mx, my = py.mouse.get_pos()
 
         if self.x + self.width > mx > self.x and self.y + self.height > my > self.y and self.can_click and py.mouse.get_pressed()[0]:
             self.can_click = False
             return True
+        return False
         
     def reset_click(self):
         if not py.mouse.get_pressed()[0]:

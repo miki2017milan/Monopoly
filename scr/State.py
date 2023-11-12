@@ -1,14 +1,16 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 
 class State(ABC):
-    state = None
+    state: State
 
     @staticmethod
-    def switch_state(state):
+    def switch_state(state: State):
         State.state = state
 
     @staticmethod
-    def get_state():
+    def get_state() -> State:
         return State.state
 
     @abstractmethod
