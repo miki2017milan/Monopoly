@@ -22,8 +22,6 @@ class StreetField(Field):
         self.house_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\House.png"))
         self.hotel_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\Hotel.png"))
 
-        self.font = py.font.SysFont("Bahnschrift", 30, bold=True)
-
     def tick(self):
         # if self.is_clicked():
         #     print("Wurde gecklicked")
@@ -46,14 +44,14 @@ class StreetField(Field):
         # py.draw.rect(win, (255, 0, 0), (self.x, self.y, self.width, self.height), 1)
 
         if self.is_selected:
-            win.blit(self.font.render(self.name, False, (0, 0, 0)), (1520, 20))
+            win.blit(self.text_font.render(self.name, False, (0, 0, 0)), (1520, 20))
             win.blit(self.img, (1520, 50))
-            win.blit(self.font.render(str(self.price) + "$", False, (0, 0, 0)), (1650, 440))
+            win.blit(self.text_font.render(str(self.price) + "$", False, (0, 0, 0)), (1650, 440))
 
             if self.owner == 0:
-                win.blit(self.font.render("Owner: Noone", False, (0, 0, 0)), (1520, 500))
+                win.blit(self.text_font.render("Owner: Noone", False, (0, 0, 0)), (1520, 500))
             else:
-                win.blit(self.font.render(f"Owner: Player {self.owner}", False, (0, 0, 0)), (1520, 500))
+                win.blit(self.text_font.render(f"Owner: Player {self.owner}", False, (0, 0, 0)), (1520, 500))
 
             # Mark current rent with houses
             if self.houses == 0:

@@ -24,6 +24,7 @@ class Field(ABC):
         self.can_click = True
         self.is_selected = False
         self.owner = 0
+        self.text_font = py.font.SysFont("Bahnschrift", 30, bold=True)
 
         # Transperent overlay when selected
         self.overlay = py.Surface((self.width, self.height))
