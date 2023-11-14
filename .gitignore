@@ -1,3 +1,4 @@
 /.vscode
 /scr/__pycache__
 /scr/fields/__pycache__
+/scr/states/__pycache__

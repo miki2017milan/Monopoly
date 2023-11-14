@@ -1,9 +1,9 @@
 import pygame as py
 
-from scr.GameState import GameState
-from scr.MenuState import MenuState
+from scr.states.GameState import GameState
+from scr.states.MenuState import MenuState
+from scr.states.State import State
 from scr.Assets import Assets
-from scr.State import State
 
 py.init()
 
@@ -36,7 +36,6 @@ class Main:
             if e.type == py.KEYDOWN:
                 if e.key == py.K_ESCAPE:
                     State.switch_state(self.menu_state)
-                    # self.game_state.board.fields[0].remove_player(3)
 
         State.get_state().tick()
 
