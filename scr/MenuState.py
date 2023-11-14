@@ -1,4 +1,4 @@
-from State import State
+from scr.State import State
 
 class MenuState(State):
     def __init__(self):

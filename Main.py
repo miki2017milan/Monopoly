@@ -1,8 +1,9 @@
 import pygame as py
 
-from GameState import GameState
-from MenuState import MenuState
-from State import State
+from scr.GameState import GameState
+from scr.MenuState import MenuState
+from scr.Assets import Assets
+from scr.State import State
 
 py.init()
 
@@ -19,6 +20,8 @@ class Main:
         self.clock = py.time.Clock()
         self.FPS = 60
         self.running = True
+
+        Assets.load()
 
         # States
         self.game_state = GameState()

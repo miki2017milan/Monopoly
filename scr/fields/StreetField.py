@@ -2,40 +2,29 @@ from tokenize import String
 import pygame as py
 import sys
 
-from fields.Field import Field
+from scr.fields.Field import Field
+from scr.Assets import Assets
 
 HOUSE_SIZE = 20
 
 class StreetField(Field):
-    def __init__(self, x: int, y: int, width: int, height: int, player_placment_offset: tuple):
+    def __init__(self, x: int, y: int, width: int, height: int, player_placment_offset: tuple, name: str):
         super().__init__(x, y, width, height, player_placment_offset)
 
-        self.name = ""
-        self.price = 0
-        self.house_cost = 0
-        self.rent_costs = []
-        self.img = None
-        self.houses = 5
-        self.facing_dir = ""
-        self.color = ""
+        self.data = Assets.street_information[name]
 
-        self.house_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\House.png"))
-        self.hotel_img = py.image.load(sys.path[0].replace("\\scr", "\\imgs\\Hotel.png"))
+        self.name = name
+        self.price = self.data[0]
+        self.house_cost = self.data[1]
+        self.rent_costs = self.data[2]
+        self.img = self.data[3]
+        self.facing_dir = self.data[4]
+        self.color = self.data[5]
+
+        self.houses = 0
 
     def tick(self):
-        # if self.is_clicked():
-        #     print("Wurde gecklicked")
-
         self.reset_click()
-
-    def add_information(self, name: str, price: int, house_cost: int, rent_costs: int, img_path: str, facing_dir: str, color: str):
-        self.name = name
-        self.price = price
-        self.house_cost = house_cost
-        self.rent_costs = rent_costs
-        self.img = py.image.load(sys.path[0].replace("\\scr", "\\imgs" + img_path))
-        self.facing_dir = facing_dir
-        self.color = color
 
     def on_land(self, player):
         pass
@@ -55,7 +44,7 @@ class StreetField(Field):
 
             # Mark current rent with houses
             if self.houses == 0:
-                py.draw.rect(win, (250, 0, 0), (1630, 115, 80, 30), 3)
+                py.draw.rect(win, (250, 0, 0), (1640, 115, 80, 30), 3)
             elif self.houses == 1:
                 py.draw.rect(win, (250, 0, 0), (1740, 147, 60, 30), 3)
             elif self.houses == 2:
@@ -73,8 +62,8 @@ class StreetField(Field):
                 space_x = int((self.width - HOUSE_SIZE * self.houses) / (self.houses + 1)) + 1
 
                 for i in range(self.houses):
-                    win.blit(self.house_img, (self.x + space_x + (i * (space_x + HOUSE_SIZE)), self.y + 5))
+                    win.blit(Assets.house_img, (self.x + space_x + (i * (space_x + HOUSE_SIZE)), self.y + 5))
         elif self.houses == 5:
             space_x = (self.width - 20) / 2
-            win.blit(self.hotel_img, (self.x + space_x, self.y + 5))
+            win.blit(Assets.hotel_img, (self.x + space_x, self.y + 5))
             

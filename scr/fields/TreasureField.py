@@ -1,4 +1,4 @@
-from fields.Field import Field
+from scr.fields.Field import Field
 
 class TreasureField(Field):
     def __init__(self, x: int, y: int, width: int, height: int, player_placement_offset: tuple):

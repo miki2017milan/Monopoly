@@ -1,8 +1,8 @@
 import pygame as py
 
-from State import State
-from Board import Board
-from Player import Player
+from scr.State import State
+from scr.Board import Board
+from scr.Player import Player
 
 class GameState(State):
     def __init__(self):
@@ -16,8 +16,8 @@ class GameState(State):
     def tick(self):
         self.board.tick()
 
-        if py.mouse.get_pressed()[0]:
-            print(f"X: {py.mouse.get_pos()[0]}, Y: {py.mouse.get_pos()[1]}")
+        # if py.mouse.get_pressed()[0]:
+        #     print(f"X: {py.mouse.get_pos()[0]}, Y: {py.mouse.get_pos()[1]}")
 
     def render(self, win):
         win.fill((220, 244, 222))
